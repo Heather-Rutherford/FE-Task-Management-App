@@ -3,7 +3,7 @@
 // incorporating TypeScript types for data validation
 // and error handling.
 import React, { useState } from "react";
-import { Form, Col, Row, Container, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import PageLayout from "./PageLayout";
 // import { Task } from "../models/Task";
 
@@ -40,59 +40,50 @@ const EditTask: React.FC = () => {
 
   return (
     <PageLayout>
-      <Container>
-        <Row className="justify-content-center">
-          <Col
-            style={{ maxWidth: "600px" }}
-            className="text-start border border-2 border-secondary p-3 rounded"
-          >
-            <h2>Edit Task</h2>
-            <Form className="text-start">
-              <Form.Group controlId="title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter task title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control type="text" as="textarea" rows={3} required />
-              </Form.Group>
-              <Form.Group controlId="dueDate">
-                <Form.Label>Due date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={due}
-                  onChange={(e) => setDue(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="priority">
-                <Form.Label>Priority</Form.Label>
-                <Form.Control as="select" required>
-                  <option>Low</option>
-                  <option>Medium</option>
-                  <option>High</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="status">
-                <Form.Label>Status</Form.Label>
-                <Form.Control as="select" required>
-                  <option>not started</option>
-                  <option>in progress</option>
-                  <option>completed</option>
-                </Form.Control>
-              </Form.Group>
+      <h2>Edit Task</h2>
+      <Form className="text-start">
+        <Form.Group controlId="title">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter task title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control type="text" as="textarea" rows={3} required />
+        </Form.Group>
+        <Form.Group controlId="dueDate">
+          <Form.Label>Due date</Form.Label>
+          <Form.Control
+            type="date"
+            value={due}
+            onChange={(e) => setDue(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="priority">
+          <Form.Label>Priority</Form.Label>
+          <Form.Control as="select" required>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="status">
+          <Form.Label>Status</Form.Label>
+          <Form.Control as="select" required>
+            <option>not started</option>
+            <option>in progress</option>
+            <option>completed</option>
+          </Form.Control>
+        </Form.Group>
 
-              <Button type="button">Save Changes</Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+        <Button type="button">Save Changes</Button>
+      </Form>
     </PageLayout>
   );
 };

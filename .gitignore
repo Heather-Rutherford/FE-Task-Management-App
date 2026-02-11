@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 /src/components/Button.tsx
 /src/components/CreateTask.txt
+/src/components/NavBar.txt

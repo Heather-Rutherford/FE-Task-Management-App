@@ -4,26 +4,49 @@
 // including features like task lists, creation, editing,
 // and deletion.
 import React from "react";
-import { Col, Container } from "react-bootstrap";
-import LoginButton from "../authentication/LoginButton";
-import LogoutButton from "../authentication/LogoutButton";
-import { useNavigate } from "react-router-dom";
 import PageLayout from "./PageLayout";
 
 const DashboardPage: React.FC = () => {
-  const navigate = useNavigate();
-  const handleCreateTask = () => {
-    navigate("/add-task");
-  };
-
   return (
     <PageLayout>
-      <Col>
-        <h1>Hello, this is the Task Management App</h1>
-        <button onClick={handleCreateTask}>Create Task</button>
-        <LoginButton />
-        <LogoutButton />
-      </Col>
+      <h2>Program Description</h2>
+      <p>
+        This program is designed to help users efficiently organize, track, and
+        manage their tasks. It combines a user-friendly interface with secure
+        authentication and structured data handling using TypeScript.
+      </p>
+      <h3>Core Features</h3>
+      <p>
+        1. Task Dashboard - Task Dashboard serves as the central hub of the
+        application. It provides: A comprehensive list of all tasks Easy task
+        creation functionality Options to edit existing tasks Ability to delete
+        tasks Clear and intuitive task management controls The dashboard is
+        designed for simplicity and efficiency, enabling users to quickly view
+        and manage their workload.
+      </p>
+      <h3>2. Task Details View</h3>
+      <p>
+        Each task includes a dedicated details page that displays complete task
+        information, such as: Title Description Status Due date Any additional
+        metadata Users can modify task details directly from this view, ensuring
+        quick updates and better task tracking.
+      </p>
+      <h3>3. Task Creation and Editing</h3>
+      <p>
+        The system includes structured forms for creating and editing tasks.
+        These forms: Use TypeScript for strong type enforcement Validate user
+        input before submission Provide meaningful error handling and feedback
+        Ensure data consistency and reliability This approach enhances
+        application stability and reduces runtime errors.
+      </p>
+      <h3>4. Authentication and Authorization</h3>
+      <p>
+        User authentication and access control are handled using Auth0. The
+        system includes: User registration page Login page Secure session
+        handling Authorization mechanisms to protect task data Only
+        authenticated users can access and manage their tasks, ensuring privacy
+        and data security.
+      </p>
     </PageLayout>
   );
 };

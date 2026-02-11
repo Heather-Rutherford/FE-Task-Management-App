@@ -1,24 +1,24 @@
 //PageLayout.tsx
-import { Col, Container, Row } from "react-bootstrap";
-import NavBar from "./NavBar";
+import React from "react";
+import SideBar from "./SideBar";
+import { Container } from "react-bootstrap";
 import NavBarButtons from "./NavBarButtons";
 
-type PageLayoutProps = {
+interface PageLayoutProps {
   children?: React.ReactNode;
-};
+}
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <NavBar />
-        </Col>
-        <Col md={3}>{children}</Col>
-      </Row>
-      <footer>
+    <Container fluid className="page-container">
+      <header className="page-header d-flex justify-content-between align-items-center">
+        <h1 className="page-title">Task Management App</h1>
         <NavBarButtons />
-      </footer>
+      </header>
+      <div className="page-main">
+        <SideBar />
+        <main className="page-content">{children}</main>
+      </div>
     </Container>
   );
 };

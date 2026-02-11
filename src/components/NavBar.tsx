@@ -1,4 +1,5 @@
 //NavBar.tsx
+import React from "react";
 import { Col, Nav, Navbar, Row } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -9,19 +10,22 @@ const NavBar: React.FC = () => {
     <Navbar>
       <Nav>
         <Col>
-          <Row className="align-items-start">
-            <Nav.Link href="/">Home |</Nav.Link>
+          <Row>
+            <Nav.Link href="/">Home</Nav.Link>
           </Row>
           {isAuthenticated && (
             <>
               <Row>
-                <Nav.Link href="/DisplayTasks"> Display Tasks |</Nav.Link>
+                <Nav.Link href="/DisplayTasks"> Display Tasks</Nav.Link>
               </Row>
               <Row>
-                <Nav.Link href="/CreateTask"> Create Task |</Nav.Link>
+                <Nav.Link href="/add-task"> Create Task</Nav.Link>
               </Row>
               <Row>
-                <Nav.Link href="/EditTask"> Edit Task |</Nav.Link>
+                <Nav.Link href="/EditTask"> Edit Task </Nav.Link>
+              </Row>
+              <Row>
+                <Nav.Link href="/ListTasks"> List Tasks </Nav.Link>
               </Row>
             </>
           )}
