@@ -25,6 +25,12 @@ const App: React.FC = () => {
     setTasks((prev) => [...prev, task]);
   };
 
+  const handleEditTask = (updatedTask: Task) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
+    );
+  };
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -34,7 +40,10 @@ const App: React.FC = () => {
         path="/add-task"
         element={<CreateTask onAddTask={handleAddTask} />}
       />
-      <Route path="/edit-task" element={<EditTask />} />
+      <Route
+        path="/edit-task/:taskId"
+        element={<EditTask onEditTask={handleEditTask} tasks={tasks} />}
+      />
       <Route path="/display-task" element={<Tasklist tasks={tasks} />} />
       <Route
         path="/display-task/:taskId"

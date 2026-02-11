@@ -2,16 +2,10 @@
 // Develop forms for creating tasks,
 // incorporating TypeScript types for data validation
 // and error handling.
-import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState, type SubmitEvent } from "react";
+import { Form, Button, ToastContainer, Toast } from "react-bootstrap";
 import PageLayout from "./PageLayout";
 import type { Task } from "../models/Task.model";
-
-// type Todo = {
-//   id: number;
-//   task: string;
-//   completed: boolean;
-// };
 
 interface CreateTaskProps {
   onAddTask: (task: Task) => void;
@@ -25,8 +19,9 @@ const CreateTask: React.FC<CreateTaskProps> = ({ onAddTask }) => {
   const [status, setStatus] = useState<
     "not started" | "in progress" | "completed"
   >("not started");
+  const [showToast, setShowToast] = useState(false);
 
-  const handleAdd = (e: React.FormEvent) => {
+  const handleAdd = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const [year, month, day] = due.split("-");
     const formattedDueDate = `${month}/${day}/${year}`;
@@ -45,12 +40,38 @@ const CreateTask: React.FC<CreateTaskProps> = ({ onAddTask }) => {
     setDue("");
     setPriority("Low");
     setStatus("not started");
+    setShowToast(true);
   };
 
   return (
     <PageLayout>
       <h2>Create Task</h2>
-      <Form className="text-start" onSubmit={handleAdd}>
+      <Form className="text-start position-relative" onSubmit={handleAdd}>
+        <ToastContainer
+          className="p-2"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 2,
+          }}
+        >
+          <Toast
+            bg="success"
+            onClose={() => setShowToast(false)}
+            show={showToast}
+            delay={2500}
+            autohide
+          >
+            <Toast.Header closeButton>
+              <strong className="me-auto">Task Created</strong>
+            </Toast.Header>
+            <Toast.Body className="text-white">
+              Your task was created successfully.
+            </Toast.Body>
+          </Toast>
+        </ToastContainer>
         <Form.Group controlId="title">
           <Form.Label>Title</Form.Label>
           <Form.Control
