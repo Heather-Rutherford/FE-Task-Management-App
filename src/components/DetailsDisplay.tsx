@@ -9,9 +9,13 @@ import type { Task } from "../models/Task.model";
 
 interface DetailsDisplayProps {
   tasks: Task[];
+  onDeleteTask: (taskId: number) => void;
 }
 
-const DetailsDisplay: React.FC<DetailsDisplayProps> = ({ tasks }) => {
+const DetailsDisplay: React.FC<DetailsDisplayProps> = ({
+  tasks,
+  onDeleteTask,
+}) => {
   const { taskId } = useParams<{ taskId: string }>();
   const parsedId = Number(taskId);
   const task = tasks.find((item) => item.id === parsedId);
@@ -48,6 +52,20 @@ const DetailsDisplay: React.FC<DetailsDisplayProps> = ({ tasks }) => {
             </Link>
             <Link className="btn btn-dark" to={`/edit-task/${task.id}`}>
               Edit Task
+            </Link>
+            <Link
+              to="#"
+              className="btn btn-dark"
+              onClick={() => {
+                const confirmed = window.confirm(
+                  "Are you sure you want to delete this task?",
+                );
+                if (confirmed) {
+                  onDeleteTask(task.id);
+                }
+              }}
+            >
+              Delete Task
             </Link>
           </div>
         </div>

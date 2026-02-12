@@ -14,12 +14,14 @@ import EditTask from "./components/EditTask";
 import Tasklist from "./components/TaskList";
 import type { Task } from "./models/Task.model";
 import DetailsDisplay from "./components/DetailsDisplay";
+import TaskReport from "./components/TaskReport";
 
 const ProtectedPageGuard = createAuthenticationGuard(ProtectedPage);
 
 const App: React.FC = () => {
   const { isLoading } = useAuth0();
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [filters, setFilters] = useState({ status: "", priority: "" });
 
   const handleAddTask = (task: Task) => {
     setTasks((prev) => [...prev, task]);
@@ -30,6 +32,26 @@ const App: React.FC = () => {
       prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
     );
   };
+
+  const handleDelete = (taskId: number) => {
+    setTasks((prev) => prev.filter((task) => task.id !== taskId));
+  };
+
+  const handleApplyFilters = (taskStatus: string, taskPriority: string) => {
+    setFilters({ status: taskStatus, priority: taskPriority });
+  };
+
+  const handleClearFilters = () => {
+    setFilters({ status: "", priority: "" });
+  };
+
+  const filteredTasks = tasks.filter((task) => {
+    const statusMatch = filters.status ? task.status === filters.status : true;
+    const priorityMatch = filters.priority
+      ? task.priority === filters.priority
+      : true;
+    return statusMatch && priorityMatch;
+  });
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -42,12 +64,32 @@ const App: React.FC = () => {
       />
       <Route
         path="/edit-task/:taskId"
-        element={<EditTask onEditTask={handleEditTask} tasks={tasks} />}
+        element={
+          <EditTask
+            onEditTask={handleEditTask}
+            tasks={tasks}
+            onDeleteTask={handleDelete}
+          />
+        }
       />
-      <Route path="/display-task" element={<Tasklist tasks={tasks} />} />
+      <Route
+        path="/display-task"
+        element={<Tasklist tasks={tasks} onDeleteTask={handleDelete} />}
+      />
       <Route
         path="/display-task/:taskId"
-        element={<DetailsDisplay tasks={tasks} />}
+        element={<DetailsDisplay tasks={tasks} onDeleteTask={handleDelete} />}
+      />
+      <Route
+        path="/task-report"
+        element={
+          <TaskReport
+            tasks={filteredTasks}
+            filters={filters}
+            onApplyFilters={handleApplyFilters}
+            onClearFilters={handleClearFilters}
+          />
+        }
       />
       <Route path="/protected" element={<ProtectedPageGuard />} />
       <Route path="/callback" element={<CallbackPage />} />

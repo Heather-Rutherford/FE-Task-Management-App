@@ -8,21 +8,14 @@ import type { Task } from "../models/Task.model";
 
 interface TaskListProps {
   tasks: Task[];
+  onDeleteTask: (taskId: number) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
   return (
     <PageLayout>
       {tasks.length > 0 && <div>Has tasks</div>}
       {tasks.length === 0 && <div>No tasks yet</div>}
-      {/* <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            {task.title} - {task.priority} - {task.status}
-          </li>
-        ))}
-      </ul> */}
-
       <Container>
         <Row>
           <Col>Title</Col>
@@ -39,7 +32,21 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
             <Col>{new Date(task.dueDate).toLocaleDateString()}</Col>
             <Col>{task.priority}</Col>
             <Col>{task.status}</Col>
-            <Col>delete</Col>
+            <Col>
+              <Link
+                to="#"
+                onClick={() => {
+                  const confirmed = window.confirm(
+                    "Are you sure you want to delete this task?",
+                  );
+                  if (confirmed) {
+                    onDeleteTask(task.id);
+                  }
+                }}
+              >
+                delete
+              </Link>
+            </Col>
           </Row>
         ))}
       </Container>

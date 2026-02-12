@@ -11,6 +11,7 @@ import type { Task } from "../models/Task.model";
 interface EditTaskProps {
   onEditTask: (updatedTask: Task) => void;
   tasks: Task[];
+  onDeleteTask: (taskId: number) => void;
 }
 
 const toInputDate = (value: string) => {
@@ -21,7 +22,11 @@ const toInputDate = (value: string) => {
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 };
 
-const EditTask: React.FC<EditTaskProps> = ({ onEditTask, tasks }) => {
+const EditTask: React.FC<EditTaskProps> = ({
+  onEditTask,
+  tasks,
+  onDeleteTask,
+}) => {
   const { taskId } = useParams<{ taskId: string }>();
   const parsedId = Number(taskId);
   const task = tasks.find((item) => item.id === parsedId);
@@ -147,8 +152,22 @@ const EditTask: React.FC<EditTaskProps> = ({ onEditTask, tasks }) => {
               <option>completed</option>
             </Form.Control>
           </Form.Group>
-
-          <Button type="submit">Save Changes</Button>
+          <div className="mt-3 gap-2 d-flex">
+            <Button type="submit">Save Changes</Button>
+            <Button
+              onClick={() => {
+                const confirmed = window.confirm(
+                  "Are you sure you want to delete this task?",
+                );
+                if (confirmed) {
+                  onDeleteTask(task.id);
+                }
+              }}
+              variant="danger"
+            >
+              Delete Task
+            </Button>
+          </div>
         </Form>
       )}
     </PageLayout>

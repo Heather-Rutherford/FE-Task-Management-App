@@ -22,10 +22,10 @@ const NavBar: React.FC = () => {
                 <Nav.Link href="/add-task"> Create Task</Nav.Link>
               </Row>
               <Row>
-                <Nav.Link href="/EditTask"> Edit Task </Nav.Link>
+                <Nav.Link href="/ListTasks"> List Tasks </Nav.Link>
               </Row>
               <Row>
-                <Nav.Link href="/ListTasks"> List Tasks </Nav.Link>
+                <Nav.Link href="/TaskReport">Task Report</Nav.Link>
               </Row>
             </>
           )}
