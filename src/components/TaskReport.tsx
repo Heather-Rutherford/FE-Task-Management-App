@@ -36,8 +36,8 @@ const TaskReport: React.FC<TaskListProps> = ({
 
   return (
     <PageLayout>
-      {tasks.length > 0 && <div>Has tasks</div>}
-      {tasks.length === 0 && <div>No tasks yet</div>}
+      {/* {tasks.length > 0 && <div>Has tasks</div>}
+      {tasks.length === 0 && <div>No tasks yet</div>} */}
       <Container>
         <Row className="justify-content-end">
           <div className="d-flex align-items-center gap-2">

@@ -35,10 +35,15 @@ const DashboardPage: React.FC = () => {
       <h5>3. Task Creation and Editing</h5>
       <p>
         The system includes structured forms for creating and editing tasks.
-        These forms: Use TypeScript for strong type enforcement Validate user
-        input before submission Provide meaningful error handling and feedback
-        Ensure data consistency and reliability This approach enhances
-        application stability and reduces runtime errors.
+        There is a link on the sidebar that directs users to the task creation
+        page, where they can input task details and submit them for inclusion in
+        the task list. The editing functionality allows users to update task
+        information as needed, ensuring that their task data remains accurate
+        and up-to-date. To access the task editing page, users can click on a
+        task title in the task list, which will take them to the task details
+        view where they can make edits. The tasks can also be deleted directly
+        from the task list, the task edit page, or the task details view,
+        providing users withflexible options for managing their tasks.
       </p>
       <h5>4. Authentication and Authorization</h5>
       <p>

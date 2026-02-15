@@ -14,8 +14,8 @@ interface TaskListProps {
 const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
   return (
     <PageLayout>
-      {tasks.length > 0 && <div>Has tasks</div>}
-      {tasks.length === 0 && <div>No tasks yet</div>}
+      {/* {tasks.length > 0 && <div>Has tasks</div>}
+      {tasks.length === 0 && <div>No tasks yet</div>} */}
       <Container>
         <Row>
           <Col>Title</Col>

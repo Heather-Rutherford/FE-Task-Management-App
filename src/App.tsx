@@ -17,6 +17,11 @@ import DetailsDisplay from "./components/DetailsDisplay";
 import TaskReport from "./components/TaskReport";
 
 const ProtectedPageGuard = createAuthenticationGuard(ProtectedPage);
+const CreateTaskGuard = createAuthenticationGuard(CreateTask);
+const EditTaskGuard = createAuthenticationGuard(EditTask);
+const TaskListGuard = createAuthenticationGuard(Tasklist);
+const DetailsDisplayGuard = createAuthenticationGuard(DetailsDisplay);
+const TaskReportGuard = createAuthenticationGuard(TaskReport);
 
 const App: React.FC = () => {
   const { isLoading } = useAuth0();
@@ -60,12 +65,12 @@ const App: React.FC = () => {
       <Route path="/" element={<DashboardPage />} />
       <Route
         path="/add-task"
-        element={<CreateTask onAddTask={handleAddTask} />}
+        element={<CreateTaskGuard onAddTask={handleAddTask} />}
       />
       <Route
         path="/edit-task/:taskId"
         element={
-          <EditTask
+          <EditTaskGuard
             onEditTask={handleEditTask}
             tasks={tasks}
             onDeleteTask={handleDelete}
@@ -74,16 +79,18 @@ const App: React.FC = () => {
       />
       <Route
         path="/display-task"
-        element={<Tasklist tasks={tasks} onDeleteTask={handleDelete} />}
+        element={<TaskListGuard tasks={tasks} onDeleteTask={handleDelete} />}
       />
       <Route
         path="/display-task/:taskId"
-        element={<DetailsDisplay tasks={tasks} onDeleteTask={handleDelete} />}
+        element={
+          <DetailsDisplayGuard tasks={tasks} onDeleteTask={handleDelete} />
+        }
       />
       <Route
         path="/task-report"
         element={
-          <TaskReport
+          <TaskReportGuard
             tasks={filteredTasks}
             filters={filters}
             onApplyFilters={handleApplyFilters}

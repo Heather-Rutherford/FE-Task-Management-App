@@ -4,7 +4,7 @@
 // and error handling.
 import React, { useState, type SubmitEvent } from "react";
 import { Form, Button, ToastContainer, Toast } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import type { Task } from "../models/Task.model";
 
@@ -27,6 +27,7 @@ const EditTask: React.FC<EditTaskProps> = ({
   tasks,
   onDeleteTask,
 }) => {
+  const navigate = useNavigate();
   const { taskId } = useParams<{ taskId: string }>();
   const parsedId = Number(taskId);
   const task = tasks.find((item) => item.id === parsedId);
@@ -56,8 +57,8 @@ const EditTask: React.FC<EditTaskProps> = ({
       status,
     };
     onEditTask(task);
-    // Let the user know that the task was edited successfully
     setShowToast(true);
+    // navigate("/display-task");
   };
 
   return (
@@ -153,6 +154,12 @@ const EditTask: React.FC<EditTaskProps> = ({
             </Form.Control>
           </Form.Group>
           <div className="mt-3 gap-2 d-flex">
+            <Button
+              variant="secondary"
+              onClick={() => navigate("/display-task")}
+            >
+              Return to Task List
+            </Button>
             <Button type="submit">Save Changes</Button>
             <Button
               onClick={() => {
@@ -161,6 +168,7 @@ const EditTask: React.FC<EditTaskProps> = ({
                 );
                 if (confirmed) {
                   onDeleteTask(task.id);
+                  navigate("/display-task");
                 }
               }}
               variant="danger"
