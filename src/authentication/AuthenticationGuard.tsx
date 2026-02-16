@@ -1,19 +1,18 @@
-// AuthenticationGuard.tsx
-// Authentication:
-// Implement user authentication with Auth0
-// and authorization pages, including registration
-// and login.
-
-import React from "react";
+//AuthenticationGuard.tsx
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 
-const renderRedirecting = () => <div>Redirecting you to the login page...</div>;
+type AuthenticationGuardProps = {
+  component: React.ComponentType<any>;
+};
 
-export const createAuthenticationGuard = <P extends object>(
-  Component: React.ComponentType<P>,
-) =>
-  withAuthenticationRequired(Component, {
-    onRedirecting: renderRedirecting,
+const AuthenticationGuard: React.FC<AuthenticationGuardProps> = ({
+  component,
+}) => {
+  const ProtectedComponent = withAuthenticationRequired(component, {
+    onRedirecting: () => <div>Redirecting you to the login page...</div>,
   });
 
-export default createAuthenticationGuard;
+  return <ProtectedComponent />;
+};
+
+export default AuthenticationGuard;

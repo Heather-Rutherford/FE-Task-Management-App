@@ -3,19 +3,18 @@
 // Implement a dashboard interface for managing tasks,
 // including features like task lists, creation, editing,
 // and deletion.
-import React from "react";
 import PageLayout from "./PageLayout";
 
 const DashboardPage: React.FC = () => {
   return (
     <PageLayout>
-      <h2>Program Description</h2>
+      <h3>Program Description</h3>
       <p>
         This program is designed to help users efficiently organize, track, and
         manage their tasks. It combines a user-friendly interface with secure
         authentication and structured data handling using TypeScript.
       </p>
-      <h3>Core Features</h3>
+      <h4>Core Features</h4>
       <h5>1. Task Dashboard</h5>
       <p>
         The Task Dashboard serves as the central hub of the application. It

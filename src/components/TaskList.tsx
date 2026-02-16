@@ -1,21 +1,25 @@
 // TaskList.tsx
-
-import React from "react";
 import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import { Col, Container, Row } from "react-bootstrap";
-import type { Task } from "../models/Task.model";
+import { useTaskContext } from "../hooks/useTaskContext";
 
-interface TaskListProps {
-  tasks: Task[];
-  onDeleteTask: (taskId: number) => void;
-}
+const TaskList: React.FC = () => {
+  const { tasks, deleteTask } = useTaskContext();
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
+  const handleDelete = (taskId: number) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this task?",
+    );
+    if (confirmed) {
+      deleteTask(taskId);
+    }
+  };
+
   return (
     <PageLayout>
-      {/* {tasks.length > 0 && <div>Has tasks</div>}
-      {tasks.length === 0 && <div>No tasks yet</div>} */}
+      {tasks.length > 0 && <div>Has tasks</div>}
+      {tasks.length === 0 && <div>No tasks yet</div>}
       <Container>
         <Row>
           <Col>Title</Col>
@@ -33,17 +37,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
             <Col>{task.priority}</Col>
             <Col>{task.status}</Col>
             <Col>
-              <Link
-                to="#"
-                onClick={() => {
-                  const confirmed = window.confirm(
-                    "Are you sure you want to delete this task?",
-                  );
-                  if (confirmed) {
-                    onDeleteTask(task.id);
-                  }
-                }}
-              >
+              <Link to="#" onClick={() => handleDelete(task.id)}>
                 delete
               </Link>
             </Col>

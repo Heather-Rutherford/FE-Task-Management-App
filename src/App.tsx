@@ -1,106 +1,116 @@
 //App.tsx
-import React, { useState } from "react";
+// React Router and other imports
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+// Authentication
+import { useAuth0 } from "@auth0/auth0-react";
+import AuthenticationGuard from "./authentication/AuthenticationGuard";
+import ProtectedPage from "./authentication/ProtectedPage";
+// Interfaces
+import { TaskProvider } from "./models/TaskContext";
+// CSS
 import "./css/App.css";
 import "./css/Tasks.css";
 import "./css/main.css";
-import { Route, Routes } from "react-router-dom";
+import "./css/management.css";
+// Components
 import DashboardPage from "./components/DashboardPage";
 import CallbackPage from "./components/CallbackPage";
-import ProtectedPage from "./authentication/ProtectedPage";
-import { useAuth0 } from "@auth0/auth0-react";
-import { createAuthenticationGuard } from "./authentication/AuthenticationGuard";
 import CreateTask from "./components/CreateTask";
 import EditTask from "./components/EditTask";
 import Tasklist from "./components/TaskList";
-import type { Task } from "./models/Task.model";
 import DetailsDisplay from "./components/DetailsDisplay";
 import TaskReport from "./components/TaskReport";
 
-const ProtectedPageGuard = createAuthenticationGuard(ProtectedPage);
-const CreateTaskGuard = createAuthenticationGuard(CreateTask);
-const EditTaskGuard = createAuthenticationGuard(EditTask);
-const TaskListGuard = createAuthenticationGuard(Tasklist);
-const DetailsDisplayGuard = createAuthenticationGuard(DetailsDisplay);
-const TaskReportGuard = createAuthenticationGuard(TaskReport);
+// Tasks used to populate the app on first load.
+// Stored in sessionStorage for persistence across reloads,
+// but resets when the browser is closed. This allows users
+// to see sample data without needing to add tasks manually,
+// while still enabling them to manage their own tasks during their session.
+// const predefinedTasks: Task[] = [
+//   {
+//     id: 1,
+//     title: "Sample Task 1",
+//     description: "This is a predefined task.",
+//     dueDate: "2026-02-20",
+//     priority: "High",
+//     status: "in progress",
+//   },
+//   {
+//     id: 2,
+//     title: "Sample Task 2",
+//     description: "Another predefined task.",
+//     dueDate: "2026-02-25",
+//     priority: "Medium",
+//     status: "in progress",
+//   },
+//   {
+//     id: 3,
+//     title: "Sample Task 3",
+//     description: "Yet another predefined task.",
+//     dueDate: "2026-03-01",
+//     priority: "Low",
+//     status: "completed",
+//   },
+//   {
+//     id: 4,
+//     title: "Sample Task 4",
+//     description: "Yet another predefined task.",
+//     dueDate: "2026-03-01",
+//     priority: "Low",
+//     status: "completed",
+//   },
+//   {
+//     id: 5,
+//     title: "Sample Task 5",
+//     description: "Yet another predefined task.",
+//     dueDate: "2026-03-01",
+//     priority: "Low",
+//     status: "not started",
+//   },
+//   {
+//     id: 6,
+//     title: "Sample Task 6",
+//     description: "Yet another predefined task.",
+//     dueDate: "2026-03-01",
+//     priority: "Low",
+//     status: "not started",
+//   },
+// ];
 
 const App: React.FC = () => {
   const { isLoading } = useAuth0();
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [filters, setFilters] = useState({ status: "", priority: "" });
-
-  const handleAddTask = (task: Task) => {
-    setTasks((prev) => [...prev, task]);
-  };
-
-  const handleEditTask = (updatedTask: Task) => {
-    setTasks((prev) =>
-      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
-    );
-  };
-
-  const handleDelete = (taskId: number) => {
-    setTasks((prev) => prev.filter((task) => task.id !== taskId));
-  };
-
-  const handleApplyFilters = (taskStatus: string, taskPriority: string) => {
-    setFilters({ status: taskStatus, priority: taskPriority });
-  };
-
-  const handleClearFilters = () => {
-    setFilters({ status: "", priority: "" });
-  };
-
-  const filteredTasks = tasks.filter((task) => {
-    const statusMatch = filters.status ? task.status === filters.status : true;
-    const priorityMatch = filters.priority
-      ? task.priority === filters.priority
-      : true;
-    return statusMatch && priorityMatch;
-  });
 
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Routes>
-      <Route path="/" element={<DashboardPage />} />
-      <Route
-        path="/add-task"
-        element={<CreateTaskGuard onAddTask={handleAddTask} />}
-      />
-      <Route
-        path="/edit-task/:taskId"
-        element={
-          <EditTaskGuard
-            onEditTask={handleEditTask}
-            tasks={tasks}
-            onDeleteTask={handleDelete}
-          />
-        }
-      />
-      <Route
-        path="/display-task"
-        element={<TaskListGuard tasks={tasks} onDeleteTask={handleDelete} />}
-      />
-      <Route
-        path="/display-task/:taskId"
-        element={
-          <DetailsDisplayGuard tasks={tasks} onDeleteTask={handleDelete} />
-        }
-      />
-      <Route
-        path="/task-report"
-        element={
-          <TaskReportGuard
-            tasks={filteredTasks}
-            filters={filters}
-            onApplyFilters={handleApplyFilters}
-            onClearFilters={handleClearFilters}
-          />
-        }
-      />
-      <Route path="/protected" element={<ProtectedPageGuard />} />
-      <Route path="/callback" element={<CallbackPage />} />
-    </Routes>
+    <TaskProvider>
+      <Routes>
+        <Route path="/" element={<DashboardPage />} />
+        <Route
+          path="/add-task"
+          element={<AuthenticationGuard component={CreateTask} />}
+        />
+        <Route
+          path="/edit-task/:taskId"
+          element={<AuthenticationGuard component={EditTask} />}
+        />
+        <Route
+          path="/display-task"
+          element={<AuthenticationGuard component={Tasklist} />}
+        />
+        <Route
+          path="/display-task/:taskId"
+          element={<AuthenticationGuard component={DetailsDisplay} />}
+        />
+        <Route
+          path="/task-report"
+          element={<AuthenticationGuard component={TaskReport} />}
+        />
+        <Route path="/protected" element={<ProtectedPage />} />
+        <Route path="/callback" element={<CallbackPage />} />
+      </Routes>
+    </TaskProvider>
   );
 };
 
