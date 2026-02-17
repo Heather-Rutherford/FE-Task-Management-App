@@ -1,7 +1,6 @@
-// Task Creation Form:
-// Develop forms for creating tasks,
-// incorporating TypeScript types for data validation
-// and error handling.
+// CreateTask.tsx
+// Form for creating a new task and adding it to global context
+
 import React, { useState, type SubmitEvent } from "react";
 import { Form, Button, ToastContainer, Toast } from "react-bootstrap";
 import PageLayout from "./PageLayout";
@@ -17,6 +16,7 @@ interface CreateFormState {
 }
 
 const CreateTask: React.FC = () => {
+  // Local form state
   const [formState, setFormState] = useState<CreateFormState>({
     title: "",
     description: "",
@@ -26,12 +26,16 @@ const CreateTask: React.FC = () => {
   });
 
   const [showToast, setShowToast] = useState<boolean>(false);
+  // Get addTask from context
   const { addTask } = useTaskContext();
 
+  // Handle form submission
   const handleAdd = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Format date
     const [year, month, day] = formState.due.split("-");
     const formattedDueDate = `${month}/${day}/${year}`;
+    // Create new task object
     const task: Task = {
       id: Date.now(),
       title: formState.title,
@@ -56,7 +60,9 @@ const CreateTask: React.FC = () => {
     <>
       <PageLayout>
         <h2>Create Task</h2>
+        {/* Task creation form */}
         <Form className="text-start position-relative" onSubmit={handleAdd}>
+          {/* Toast notification for success */}
           <ToastContainer
             className="p-2"
             style={{
@@ -82,6 +88,7 @@ const CreateTask: React.FC = () => {
               </Toast.Body>
             </Toast>
           </ToastContainer>
+          {/* Form fields for task properties */}
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
             <Form.Control
@@ -97,7 +104,6 @@ const CreateTask: React.FC = () => {
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
               as="textarea"
               rows={3}
               value={formState.description}

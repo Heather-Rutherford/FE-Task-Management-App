@@ -1,6 +1,10 @@
+// TaskContext.tsx
+// Provides global task state and actions via React Context API
+
 import React, { createContext, useState, type ReactNode } from "react";
 import type { Task } from "./Task.model";
 
+// Predefined tasks for initial state
 const predefinedTasks: Task[] = [
   {
     id: 1,
@@ -52,6 +56,12 @@ const predefinedTasks: Task[] = [
   },
 ];
 
+// Context type: exposes tasks and task actions
+// tasks: array of Task
+// addTask: function to add a task
+// updateTask: function to update a task
+// deleteTask: function to delete a task
+
 type TaskContextType = {
   tasks: Task[];
   addTask: (task: Task) => void;
@@ -59,18 +69,24 @@ type TaskContextType = {
   deleteTask: (taskId: number) => void;
 };
 
+// Create context
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
+// Provider component: wraps app and provides task state/actions
 export const TaskProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  // Global task state
   const [tasks, setTasks] = useState<Task[]>(predefinedTasks);
 
+  // Add a task
   const addTask = (task: Task) => setTasks((prev) => [...prev, task]);
+  // Update a task
   const updateTask = (updatedTask: Task) =>
     setTasks((prev) =>
       prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
     );
+  // Delete a task
   const deleteTask = (taskId: number) =>
     setTasks((prev) => prev.filter((task) => task.id !== taskId));
 

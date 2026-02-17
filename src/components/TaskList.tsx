@@ -1,12 +1,16 @@
 // TaskList.tsx
+// Displays all tasks and allows deletion using context
+
 import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTaskContext } from "../hooks/useTaskContext";
 
 const TaskList: React.FC = () => {
+  // Get tasks and deleteTask from context
   const { tasks, deleteTask } = useTaskContext();
 
+  // Handle task deletion
   const handleDelete = (taskId: number) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this task?",
@@ -18,6 +22,7 @@ const TaskList: React.FC = () => {
 
   return (
     <PageLayout>
+      {/* Show message if tasks exist or not */}
       {tasks.length > 0 && <div>Has tasks</div>}
       {tasks.length === 0 && <div>No tasks yet</div>}
       <Container>
@@ -28,6 +33,7 @@ const TaskList: React.FC = () => {
           <Col>Status</Col>
           <Col></Col>
         </Row>
+        {/* Render each task row */}
         {tasks.map((task) => (
           <Row key={task.id}>
             <Col>

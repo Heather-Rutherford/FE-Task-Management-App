@@ -1,4 +1,5 @@
-// TaskList.tsx
+// TaskReport.tsx
+// Displays a report of tasks with filtering by status and priority
 
 import React, { useState } from "react";
 import PageLayout from "./PageLayout";
@@ -7,8 +8,10 @@ import { type Task } from "../models/Task.model";
 import { useTaskContext } from "../hooks/useTaskContext";
 
 const TaskReport: React.FC = () => {
+  // Get tasks from context
   const { tasks } = useTaskContext();
 
+  // Filter state for dropdowns
   type Filter = {
     status: string;
     priority: string;
@@ -19,10 +22,12 @@ const TaskReport: React.FC = () => {
     priority: "All",
   });
 
+  // Clear filters handler
   const handleClearFilters = () => {
     setFilters({ status: "All", priority: "All" });
   };
 
+  // Filter tasks based on dropdown values
   const filteredTasks: Task[] = tasks.filter((task) => {
     const statusMatch =
       filters.status === "All" ? true : task.status === filters.status;
@@ -37,6 +42,7 @@ const TaskReport: React.FC = () => {
         <Container>
           <Row className="justify-content-end">
             <div className="d-flex align-items-center gap-2">
+              {/* Status filter dropdown */}
               <label htmlFor="statusFilter">Filter by status:</label>
               <select
                 id="statusFilter"
@@ -52,6 +58,7 @@ const TaskReport: React.FC = () => {
                 <option value="in progress">in progress</option>
                 <option value="completed">completed</option>
               </select>
+              {/* Priority filter dropdown */}
               <label htmlFor="priorityFilter">Filter by priority:</label>
               <select
                 id="priorityFilter"
@@ -67,6 +74,7 @@ const TaskReport: React.FC = () => {
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
               </select>
+              {/* Clear filters button */}
               <Button
                 className="btn btn-dark"
                 onClick={() => handleClearFilters()}
@@ -83,6 +91,7 @@ const TaskReport: React.FC = () => {
             <Col>Status</Col>
             <Col></Col>
           </Row>
+          {/* Render filtered tasks */}
           {filteredTasks.map((task) => (
             <Row key={task.id}>
               <Col>{task.title}</Col>
