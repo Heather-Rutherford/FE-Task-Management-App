@@ -13,6 +13,7 @@
 - The `Auth0Provider` component wraps the app and manages authentication state.
 - The `useAuth0` hook is used in components to check if a user is authenticated and to access user info.
 - Protected routes/components use authentication guards to restrict access to logged-in users only.
+- A **Register** (Sign Up) button is provided in the navigation bar, allowing new users to create an account. This button uses Auth0's `loginWithRedirect` method with the `{ screen_hint: "signup" }` option to redirect users directly to the Auth0 registration page.
 
 ## Task CRUD Operations
 

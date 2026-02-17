@@ -17,3 +17,8 @@
   color: #fff;
   font-weight: 600;
 }
+
+.button-group {
+  display: flex;
+  gap: 8px; /* Adjust the gap as needed */
+}

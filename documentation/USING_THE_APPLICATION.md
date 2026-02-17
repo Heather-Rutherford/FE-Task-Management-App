@@ -1,20 +1,20 @@
 # Using the Task Management Application
 
-## 1. Logging In
+## 1. Logging In or Registering
 
 - Open the website in your browser (e.g., http://localhost:5173 or the port shown in your terminal).
-- Click the "Login" button in the navigation bar at the top of the page.
-- Sign in using your Auth0 credentials. If you do not have an account, follow the Auth0 registration process.
+- Click the **Login** button in the navigation bar at the top of the page to sign in with your Auth0 credentials.
+- If you do not have an account, click the **Register** (or **Sign Up**) button in the navigation bar to create a new account. This will take you directly to the Auth0 registration page.
 - Once logged in, you will have access to all task management features.
 
 ## 2. Navigating the Dashboard
 
-- The sidebar (or hamburger menu on mobile) provides links to all main sections:
+- The sidebar provides links to all main sections:
   - **Home**: View the dashboard overview and quick stats.
   - **Create Task**: Add a new task to your list.
   - **Display Tasks**: View all your tasks in a list format. Click a task title to see details.
   - **Task Report**: Filter and view tasks by status or priority.
-- The navigation bar at the top also provides login/logout options and may show your user profile or avatar.
+- The navigation bar at the top also provides **Login**, **Register**, and **Logout** options, and may show your user profile or avatar.
 
 ## 3. Creating a Task
 
@@ -44,18 +44,12 @@
 - Click "Clear Filters" to reset and view all tasks.
 - This section helps you quickly find tasks that match specific criteria.
 
-## 6. Mobile Usage
-
-- On mobile devices, the sidebar is replaced by a hamburger menu (three horizontal lines).
-- Tap the hamburger icon to open or close the menu and access navigation links.
-- All features are fully accessible and responsive on mobile.
-
-## 7. Logging Out
+## 6. Logging Out
 
 - Click the "Logout" button in the navigation bar to securely sign out.
-- You will be redirected to the login page and your session will end.
+- You will be redirected to the dashboard page and your session will end.
 
-## 8. Error Handling and Support
+## 7. Error Handling and Support
 
 - If you enter invalid data in a form, you will see an error message and the form will not submit until corrected.
 - If you encounter any issues (e.g., cannot log in, features not working), try refreshing the page or logging out and back in.
