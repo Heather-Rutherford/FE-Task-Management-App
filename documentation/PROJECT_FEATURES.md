@@ -8,6 +8,13 @@
   - Protected routes ensure unauthorized users cannot view or modify task data.
   - Login and logout buttons are available in the navigation bar.
 
+- **User Authentication & Profile:**
+  - Secure login, logout, and registration using Auth0.
+  - Only authenticated users can access and manage tasks.
+  - Protected routes ensure unauthorized users cannot view or modify task data.
+  - Login, logout, and register buttons are available in the navigation bar.
+  - Authenticated users can view their profile information (name, email, picture, etc.) on a dedicated Profile page, using strong TypeScript types for user data.
+
 - **Task Management:**
   - Users can create new tasks by filling out a form with title, description, due date, priority, and status.
   - All tasks are listed in the "Display Tasks" section, showing key details for each task.
@@ -29,7 +36,13 @@
 
 - **Responsive UI:**
   - The interface is built with React Bootstrap for a modern, responsive look.
-  - The sidebar and navigation bar adapt to different screen sizes, with a hamburger menu for mobile devices.
+  - The sidebar and navigation bar (now in the `src/navigation/` folder) adapt to different screen sizes, with a hamburger menu for mobile devices.
+  - All forms and tables are styled for clarity and usability on both desktop and mobile.
+
+- **Responsive UI & Navigation:**
+  - The interface is built with React Bootstrap for a modern, responsive look.
+  - The sidebar and navigation bar (now in the `src/navigation/` folder) adapt to different screen sizes, with a hamburger menu for mobile devices.
+  - Navigation components are modular and imported into the main layout for consistency.
   - All forms and tables are styled for clarity and usability on both desktop and mobile.
 
 - **Error Handling & Validation:**

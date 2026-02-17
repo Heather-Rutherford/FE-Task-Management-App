@@ -14,6 +14,7 @@
   - **Create Task**: Add a new task to your list.
   - **Display Tasks**: View all your tasks in a list format. Click a task title to see details.
   - **Task Report**: Filter and view tasks by status or priority.
+  - **User Profile**: Displays user information from the Auth0 service.
 - The navigation bar at the top also provides **Login**, **Register**, and **Logout** options, and may show your user profile or avatar.
 
 ## 3. Creating a Task
@@ -43,6 +44,20 @@
 - The filtered list updates automatically as you change the filters.
 - Click "Clear Filters" to reset and view all tasks.
 - This section helps you quickly find tasks that match specific criteria.
+
+## 6. Viewing the User Profile
+
+- Go to "User Profile" in the sidebar or menu.
+- A page displays with information on the authenticated user.
+- Fields include:
+- name
+- User ID
+- First Name
+- Last Name
+- Nickname
+- Locale
+- Email
+- Last Updated
 
 ## 6. Logging Out
 

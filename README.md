@@ -8,6 +8,7 @@ A React + TypeScript task management app with authentication, global state manag
 
 - User authentication (Auth0)
 - Create, edit, delete tasks
+- View the user profile
 - Global task state via Context API
 - Task filtering and reporting
 - Responsive UI with React Bootstrap
@@ -75,12 +76,16 @@ All dependencies are installed automatically with `npm install`.
     - `DashboardPage.tsx` — Main dashboard view
     - `DetailsDisplay.tsx` — Task details view
     - `EditTask.tsx` — Edit task form
-    - `NavBar.tsx` — Top navigation bar
-    - `NavBarButtons.tsx` — Login/Logout buttons
     - `PageLayout.tsx` — Layout wrapper (includes sidebar)
+  - `navigation/` — Navigation-related components
+    - `NavBar.tsx` — Top navigation bar (now imported in PageLayout)
+    - `NavBarButtons.tsx` — Login/Logout/Register buttons (used inside NavBar)
     - `SideBar.tsx` — Sidebar navigation
-    - `TaskList.tsx` — Task list and deletion
-    - `TaskReport.tsx` — Task filtering/reporting
+  - `authentication/` — Auth0 authentication guards, login/logout, and profile
+    - `ProfilePage.tsx` — Displays authenticated user profile using Auth0 user data
+    - `LoginButton.tsx`, `LogoutButton.tsx`, `RegisterButton.tsx`, etc.
+  - `TaskList.tsx` — Task list and deletion
+  - `TaskReport.tsx` — Task filtering/reporting
   - `css/` — CSS files for styling
     - `App.css`, `index.css`, `main.css`, `nav.css`, `Tasks.css`
   - `models/` — TypeScript models and context
@@ -106,6 +111,12 @@ This structure helps organize code by feature and responsibility for easier main
 
 - Auth0 is used for login/logout
 - See `src/providers/Auth0Provider.tsx` for domain/clientId setup
+
+## User Profile
+
+- The `ProfilePage` component in `src/authentication/ProfilePage.tsx` displays the authenticated user's profile information using the Auth0 user data types defined in `src/models/Auth0.model.ts`.
+- It shows fields such as name, email, profile picture, and more, depending on available Auth0 claims.
+- You can customize the profile display by editing `ProfilePage.tsx` and using additional fields from the `Auth0User` interface.
 
 ## Adding/Deleting/Filtering Tasks
 

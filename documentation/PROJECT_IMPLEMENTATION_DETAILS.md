@@ -2,10 +2,11 @@
 
 ## Context API for Global State
 
-- The `TaskContext.tsx` file defines a React Context and Provider for managing the global state of tasks.
+- The `TaskContext.tsx` file in `src/models/` defines a React Context and Provider for managing the global state of tasks.
 - The `TaskProvider` component wraps the app and supplies `tasks`, `addTask`, `updateTask`, and `deleteTask` functions to all children.
-- The custom hook `useTaskContext` is used in components to access and modify the global task state.
+- The custom hook `useTaskContext` (in `src/hooks/useTaskContext.ts`) is used in components to access and modify the global task state.
 - Predefined sample tasks are loaded into state on initialization for demonstration purposes.
+- TypeScript interfaces for tasks and context are defined in `src/models/Task.model.tsx` and `src/models/TaskContext.tsx` for type safety across the app.
 
 ## Authentication with Auth0
 
@@ -14,6 +15,7 @@
 - The `useAuth0` hook is used in components to check if a user is authenticated and to access user info.
 - Protected routes/components use authentication guards to restrict access to logged-in users only.
 - A **Register** (Sign Up) button is provided in the navigation bar, allowing new users to create an account. This button uses Auth0's `loginWithRedirect` method with the `{ screen_hint: "signup" }` option to redirect users directly to the Auth0 registration page.
+- A **User Profile** link is provided in the side navigation bar, allowing users to view their user profile as stored in the Auth0 provider. The profile is displayed using the `ProfilePage` component in `src/authentication/ProfilePage.tsx`, which uses strong TypeScript types from `src/models/Auth0.model.ts` for type safety and extensibility.
 
 ## Task CRUD Operations
 
@@ -57,6 +59,13 @@
 - `src/components/CreateTask.tsx`: Task creation form and validation.
 - `src/components/TaskReport.tsx`: Filtering and reporting logic.
 - `src/providers/Auth0Provider.tsx`: Auth0 authentication setup.
+- `src/authentication/ProfilePage.tsx`: Displays authenticated user profile using Auth0 user data.
+- `src/models/Task.model.tsx`: Task type/interface definitions.
+- `src/models/Auth0.model.ts`: TypeScript types for Auth0 user data.
+- `src/navigation/NavBar.tsx`: Top navigation bar (now imported in PageLayout).
+- `src/navigation/NavBarButtons.tsx`: Login/Logout/Register buttons (used inside NavBar).
+- `src/navigation/SideBar.tsx`: Sidebar navigation.
+- `src/components/PageLayout.tsx`: Layout wrapper (now imports NavBar from navigation/).
 
 ---
 

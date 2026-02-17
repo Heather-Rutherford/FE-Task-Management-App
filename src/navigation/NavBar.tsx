@@ -3,6 +3,8 @@ import React from "react";
 import { Col, Nav, Navbar, Row } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import NavBarButtons from "./NavBarButtons";
+
 const NavBar: React.FC = () => {
   const { isAuthenticated } = useAuth0();
 
@@ -26,6 +28,9 @@ const NavBar: React.FC = () => {
               </Row>
               <Row>
                 <Nav.Link href="/TaskReport">Task Report</Nav.Link>
+              </Row>
+              <Row>
+                <NavBarButtons />
               </Row>
             </>
           )}

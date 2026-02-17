@@ -1,0 +1,61 @@
+//NavBar.tsx
+import React from "react";
+// import { Col, Nav, Navbar, Row } from "react-bootstrap";
+// import { useAuth0 } from "@auth0/auth0-react";
+
+const NavBar: React.FC = () => {
+  // const { isAuthenticated } = useAuth0();
+
+  return (
+    <Navbar>
+      <Nav>
+        <Col>
+          <Row>
+            <Nav.Link href="/">Home</Nav.Link>
+          </Row>
+          {isAuthenticated && (
+            <>
+              <Row>
+                <Nav.Link href="/DisplayTasks"> Display Tasks</Nav.Link>
+              </Row>
+              <Row>
+                <Nav.Link href="/add-task"> Create Task</Nav.Link>
+              </Row>
+              <Row>
+                <Nav.Link href="/EditTask"> Edit Task </Nav.Link>
+              </Row>
+            </>
+          )}
+        </Col>
+      </Nav>
+    </Navbar>
+  );
+};
+
+export default NavBar;
+
+//NavBar.tsx
+import React from "react";
+// import { Col, Nav, Navbar, Row } from "react-bootstrap";
+// import { useAuth0 } from "@auth0/auth0-react";
+
+const NavBar: React.FC = () => {
+  // const { isAuthenticated } = useAuth0();
+
+  return (
+    <nav
+      className="w-full bg-slate-800 
+    shadow-md h-16 p-5 flex items-center justify-between between"
+    >
+      <h2 className="text-white">Task Management App</h2>
+      <button
+        className="bg-gray-600 text-white 
+      px-4 py-2 rounded"
+      >
+        Login
+      </button>
+    </nav>
+  );
+};
+
+export default NavBar;

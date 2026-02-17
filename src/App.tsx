@@ -21,6 +21,7 @@ import EditTask from "./components/EditTask";
 import Tasklist from "./components/TaskList";
 import DetailsDisplay from "./components/DetailsDisplay";
 import TaskReport from "./components/TaskReport";
+import ProfilePage from "./authentication/ProfilePage";
 
 const App: React.FC = () => {
   const { isLoading } = useAuth0();
@@ -50,6 +51,10 @@ const App: React.FC = () => {
         <Route
           path="/task-report"
           element={<AuthenticationGuard component={TaskReport} />}
+        />
+        <Route
+          path="/profile"
+          element={<AuthenticationGuard component={ProfilePage} />}
         />
         <Route path="/protected" element={<ProtectedPage />} />
         <Route path="/callback" element={<CallbackPage />} />

@@ -16,6 +16,7 @@ const SideBar: React.FC = () => {
             <NavLink to="/display-task">Display Tasks</NavLink>
           )}
           {isAuthenticated && <NavLink to="/task-report">Task Report</NavLink>}
+          {isAuthenticated && <NavLink to="/profile">User Profile</NavLink>}
         </nav>
       </aside>
     </>
