@@ -12,6 +12,12 @@ A React + TypeScript task management app with authentication, global state manag
 - Global task state via Context API
 - Task filtering and reporting
 - Responsive UI with React Bootstrap
+- Extensive documentation outside this README is located in the documentation folder. The documentation folder contains the following files:
+  - PROJECT_ARCHITECTURE.md — Describes the overall architecture and component tree of the project.
+  - PROJECT_FEATURES.md — Lists and explains all major features and capabilities of the application.
+  - PROJECT_IMPLEMENTATION_DETAILS.md — Provides technical details on how key features are implemented, including state management, authentication, and error handling.
+  - PROJECT_REQUIREMENTS.md — Outlines the functional and technical requirements for the project.
+  - USING_THE_APPLICATION.md — Offers user-facing instructions and guidance for using the application.
 - Other features are described in the PROJECT_FEATURES.md file in the documentation folder.
 
 ## Architecture
