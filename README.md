@@ -67,7 +67,7 @@ All dependencies are installed automatically with `npm install`.
    npm run dev
    ```
 
-4. Postman can be started and the API endpoints can be used. If the server is not started, the API endpoints will not work.
+4. After starting the development server, use the Local URL to open the Task Management application in your web browser. The URL will look like and even be http://localhost:5173/.
 
 ## Folder Structure
 
