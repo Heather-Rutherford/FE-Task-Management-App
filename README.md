@@ -69,6 +69,10 @@ All dependencies are installed automatically with `npm install`.
 
 4. After starting the development server, use the Local URL to open the Task Management application in your web browser. The URL will look like and even be http://localhost:5173/.
 
+## Notes
+
+The Task Management App is preloaded with 6 tasks. This is for ease of testing the application. You don't have to spend time entering task after task after task, etc.
+
 ## Folder Structure
 
 - `public/` — Static assets (favicon, images, etc.)
