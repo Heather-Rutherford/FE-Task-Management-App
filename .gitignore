@@ -26,3 +26,4 @@ dist-ssr
 /src/components/CreateTask.txt
 /src/components/NavBar.txt
 /src/components/NavBar.tsx
+/src/navigation/NavBar.txt
