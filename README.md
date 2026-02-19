@@ -67,7 +67,7 @@ All dependencies are installed automatically with `npm install`.
    npm run dev
    ```
 
-4. Open the app in your browser at the port shown (e.g., http://localhost:5173 or http://localhost:5174).
+4. Postman can be started and the API endpoints can be used. If the server is not started, the API endpoints will not work.
 
 ## Folder Structure
 
